@@ -9,12 +9,15 @@ from parser import Parser
 
 class Parser_Test:
 
-    def parsing_test_lower(self):
-        sentence_test1 = Parser("Place Charles De Gaulles Lille France")
+    def parsing_test_lowercase(self):
+        sentence_test1 = Parser("Place Charles de Gaulles Lille France")
         assert sentence_test1.parsing() == "place charles de gaulles lille france"
 
     def parsing_test_ponctuation(self):
-        sentence_test2 = Parser('Place Charles de Gaulles, Lille, France')
-        assert sentence_test2.parsing == "place charles de gaulles lille france"
+        sentence_test2 = Parser('3, Place Charles de Gaulles, Lille; France!')
+        assert sentence_test2.parsing == "3 place charles de gaulles lille france"
 
+    def parsing_test_stopwords(self):
+        sentence3 = Parser("Salut Papy ! Je voudrais aller : Place du Trocadero à Paris")
+        assert sentence3.parsing() == "place trocadero paris"
     

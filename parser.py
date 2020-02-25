@@ -7,25 +7,27 @@ class Parser():
     def __init__(self, sentence):
         self.sentence = sentence
 
-    def parsing(self):
+    def parsing_lowercase(self):
         # To put all words of the sentence in lowercase
         self.sentence = self.sentence.lower()
+        return self.sentence
+        
+    def parsing_ponctuation(self):
         # To remove all ponctuation from the sentence
         self.sentence = re.sub(r"[.!,;?:\']", " ", self.sentence)
+        return self.sentence
+        
+    def split_sentence(self):
         # To split sentence into a words list
         self.sentence = self.sentence.split()
+        return self.sentence
+    
+    def parsing_stopwords(self):
         # To remove all stopwords from the sentence
         sentence_ordered = []
         for word in self.sentence:
             if word not in STOPWORDS:
                 sentence_ordered.append(word)
-        #print(sentence_ordered)
-
-
-#def test():
-#    sentence_test = Parser("Bonjour Grandpy, je recherche l'adresse : 3 Place de l'étoile, Lille; France!")
-#    sentence_test.parsing()
-
-#if __name__ == "__main__":
-#    test()
+        return sentence_ordered
+    
     

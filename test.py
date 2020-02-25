@@ -1,23 +1,22 @@
 import pytest
 from parser import Parser
 
-#def hello(name):
-#    return "Hello " + name
 
-#def test_hello():
-#    assert hello('Fabrice') == "Hello Fabrice"
-
-class Parser_Test:
-
-    def parsing_test_lowercase(self):
+class Test_Parser:
+    
+    def test_parsing_lowercase(self):
         sentence_test1 = Parser("Place Charles de Gaulles Lille France")
-        assert sentence_test1.parsing() == "place charles de gaulles lille france"
+        assert sentence_test1.parsing_lowercase() == "place charles de gaulles lille france"
 
-    def parsing_test_ponctuation(self):
-        sentence_test2 = Parser('3, Place Charles de Gaulles, Lille; France!')
-        assert sentence_test2.parsing == "3 place charles de gaulles lille france"
+    def test_parsing_ponctuation(self):
+        sentence_test2 = Parser("3, Place Charles de Gaulles, Lille; France!")
+        assert sentence_test2.parsing_ponctuation() == "3  Place Charles de Gaulles  Lille  France "
+    
+    def test_split_sentence(self):
+        sentence_test3 = Parser("Place Charles de Gaulles")
+        assert sentence_test3.split_sentence() == ["Place", "Charles", "de", "Gaulles"]
 
-    def parsing_test_stopwords(self):
-        sentence_test3 = Parser("Salut Papy ! Je voudrais aller : Place du Trocadero à Paris")
-        assert sentence_test3.parsing() == "place trocadero paris"
+    def test_parsing_stopwords(self):
+        sentence_test4 = Parser([ 'je', 'voudrais', 'aller', 'Place', 'du', 'Trocadero', 'à', 'Paris' ])
+        assert sentence_test4.parsing_stopwords() == ['Place', 'Trocadero', 'Paris']
     

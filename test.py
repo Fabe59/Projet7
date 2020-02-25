@@ -18,6 +18,6 @@ class Parser_Test:
         assert sentence_test2.parsing == "3 place charles de gaulles lille france"
 
     def parsing_test_stopwords(self):
-        sentence3 = Parser("Salut Papy ! Je voudrais aller : Place du Trocadero à Paris")
-        assert sentence3.parsing() == "place trocadero paris"
+        sentence_test3 = Parser("Salut Papy ! Je voudrais aller : Place du Trocadero à Paris")
+        assert sentence_test3.parsing() == "place trocadero paris"
     

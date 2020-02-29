@@ -29,5 +29,5 @@ class Parser():
             if word not in STOPWORDS:
                 sentence_ordered.append(word)
         return sentence_ordered
-    
+
     

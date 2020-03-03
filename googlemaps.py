@@ -10,13 +10,12 @@ class GoogleMaps:
     def get_coordinates(self, location):
         params = {
             "address" : location,
-            "key" : "XXX"
+            "key" : "AIzaSyByet3QFOJyQq_4e3Rn8shl5SRTb8oXZF4"
         }
 
         request = requests.get(self.url, params)
         data = request.json()
-        #print(data)
         address = data["results"][0]["formatted_address"]
-        lat = (data["results"][0]['geometry']['location']['lat'])
-        long = (data["results"][0]['geometry']['location']['lng'])
+        lat = data["results"][0]['geometry']['location']['lat']
+        long = data["results"][0]['geometry']['location']['lng']
         return address, lat, long

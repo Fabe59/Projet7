@@ -1,6 +1,7 @@
 from parser import Parser
 from googlemaps import GoogleMaps
-import urllib.request
+from mediawiki import Mediawiki
+
 
 class Test_Parser:
     
@@ -23,8 +24,7 @@ class Test_Parser:
 class Test_GoogleMaps:
 
     def test_request_googlemaps(self, monkeypatch):
-        request_google_test = GoogleMaps()
-        results = {
+        result = {
             "results": [
         {
          "formatted_address": "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France",
@@ -34,10 +34,17 @@ class Test_GoogleMaps:
                "lng": 2.2944813
                }
          }}]}
+         
+        def mock_get(requests, params):
+
+            class JsonResponse:
+
+                def json(self):
+                    return result
             
+            return JsonResponse()
 
-        def mockreturn(request):
-            return results
-        monkeypatch.setattr(urllib.request, 'urlopen', mockreturn)
-
-        assert request_google_test.get_coordinates("Tour Eiffel") == (results['results'][0]['formatted_address'], results['results'][0]['geometry']['location']['lat'], results['results'][0]['geometry']['location']['lng'])
+        monkeypatch.setattr('requests.get', mock_get)
+        request_google_test = GoogleMaps()
+        result_test = request_google_test.get_coordinates("Tour Eiffel")
+        assert result_test == ('Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France', 48.85837009999999, 2.2944813)

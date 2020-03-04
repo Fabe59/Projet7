@@ -1,0 +1,45 @@
+.header {
+    background: grey;
+    padding: 20px;
+}
+
+.header img {
+    width: 100%;
+    height: auto;
+}
+
+.header-title {
+    margin-top: 0;
+    color: whitesmoke;
+    font-family: fantasy, sans-serif;
+    text-align: center;
+}
+
+.main {
+    background: lightgray;
+    padding: 20px;
+    text-align: center;
+}
+
+.intro {
+    font-weight: lighter;
+}
+
+.footer {
+    background: grey;
+    padding: 20px 20px;
+}
+
+.section-link {
+    text-align: center;
+}
+
+.section-link a {
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration-line: none;
+}
+
+.section-link a:hover {
+    text-decoration-line: underline;
+}

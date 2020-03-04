@@ -10,7 +10,7 @@ class GoogleMaps:
     def get_coordinates(self, location):
         params = {
             "address" : location,
-            "key" : "AIzaSyByet3QFOJyQq_4e3Rn8shl5SRTb8oXZF4"
+            "key" : "XXX"
         }
 
         request = requests.get(self.url, params)

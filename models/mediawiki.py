@@ -37,5 +37,4 @@ class Mediawiki:
         data = request.json()
         info = data["query"]["pages"][str(pageid)]["extract"]
         url = data["query"]["pages"][str(pageid)]["fullurl"]
-        print(info)
-        print(url)
+

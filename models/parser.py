@@ -1,5 +1,5 @@
 import re
-from config import STOPWORDS
+from settings.config import STOPWORDS
 
 class Parser():
     """ Class to parse the sentence indicated by the user """

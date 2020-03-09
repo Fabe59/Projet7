@@ -5,7 +5,7 @@
         <title>GrandPy Bot</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="GrandPy Bot, le papy robot">
-        <link href="style.css" rel="stylesheet">
+        <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}/>
     </head>
     <body>
         <header class="header">
@@ -13,10 +13,28 @@
         </header>
         <section class="main">
             <h3 class="intro">J'ai d'énormes connaissances sur les lieux et leur histoire. Poses-moi une question pour me tester!</h3>
-            <form action="xxx" method="post">
-                <label for="requestinput"></label>
-                <input type="text" name="request" id="requestinput" class="request-zone" placeholder="Pour ta recherche, c'est ici!" autofocus>
+            <form id="request-input-form">
+                <label for="userText"></label>
+                <input type="text" name="userText" id="userText" class="input-user-text" placeholder="Pour ta recherche, c'est ici!" autofocus>
+                <input type="submit" value="Envoyer">
             </form>
+
+            <script>
+                let form =document.querySelector("#request-input-form");
+
+                form.addEventListener("submit", function (event){
+                    event.preventDefault();
+                    
+                    // Envoyer le contenu du formulaire au serveur
+                    fetch("/ajax", {
+                        method: "Post",
+                        body: new FormData(form)
+                    }).then(function(response) {
+                        console.log(response.json())
+                            });
+                })
+            </script>
+
         </section>
         <footer class="footer">
             <section class="section-link">

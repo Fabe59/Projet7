@@ -12,7 +12,7 @@ class Mediawiki:
         params = {
             "action" : "query",
             "list" : "geosearch",
-            "gsradius" : 10,
+            "gsradius" : 100,
             "gscoord" : coordinates,
             "format" : "json"
         }
@@ -26,7 +26,7 @@ class Mediawiki:
         params = {
             "format" : "json",
             "action" : "query",
-            "prop" : "info|extracts",
+            "prop" : "extracts|info",
             "inprop" : "url",
             "exsentences" : 5,
             "explaintext" : True,
@@ -37,15 +37,5 @@ class Mediawiki:
         data = request.json()
         info = data["query"]["pages"][str(pageid)]["extract"]
         url = data["query"]["pages"][str(pageid)]["fullurl"]
-        return info, url
-        
-
-
-def run():
-    test = Mediawiki()
-    test.get_page_id(48.85837009999999, 2.2944813)
-    test.extract_info(1359783)
-
-if __name__ == "__main__":
-    run()
-
+        print(info)
+        print(url)

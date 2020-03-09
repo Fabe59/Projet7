@@ -1,5 +1,5 @@
-import requests
 from settings.config import GOOGLE_MAP_API_KEY
+import requests
 
 
 class GoogleMaps:
@@ -10,7 +10,7 @@ class GoogleMaps:
     def get_coordinates(self, location):
         params = {
             "address" : location,
-            "key" : "XXX"
+            "key" : GOOGLE_MAP_API_KEY
         }
 
         request = requests.get(self.url, params)
@@ -19,4 +19,3 @@ class GoogleMaps:
         lat = data["results"][0]['geometry']['location']['lat']
         long = data["results"][0]['geometry']['location']['lng']
         return address, lat, long
-

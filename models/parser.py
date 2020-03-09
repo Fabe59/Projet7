@@ -24,10 +24,10 @@ class Parser():
     
     def parsing_stopwords(self):
         # To remove all stopwords from the sentence
-        sentence_ordered = []
+        sentence_ordered = ""
         for word in self.sentence:
             if word not in STOPWORDS:
-                sentence_ordered.append(word)
-        return sentence_ordered
+                sentence_ordered += word + " "
+        return sentence_ordered.strip()
 
     

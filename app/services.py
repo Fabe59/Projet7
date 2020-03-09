@@ -1,6 +1,6 @@
-from parser import Parser
-from googlemaps import GoogleMaps
-from mediawiki import Mediawiki
+from models.parser import Parser
+from models.googlemaps import GoogleMaps
+from models.mediawiki import Mediawiki
 
 
 class Services():

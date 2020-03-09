@@ -10,7 +10,7 @@ class GoogleMaps:
     def get_coordinates(self, location):
         params = {
             "address" : location,
-            "key" : "AIzaSyByet3QFOJyQq_4e3Rn8shl5SRTb8oXZF4"
+            "key" : "xxx"
         }
 
         request = requests.get(self.url, params)
@@ -18,12 +18,13 @@ class GoogleMaps:
         address = data["results"][0]["formatted_address"]
         lat = data["results"][0]['geometry']['location']['lat']
         long = data["results"][0]['geometry']['location']['lng']
-        return address, lat, long
+        print(address, lat, long)
+        #return address, lat, long
 
-#def test():
-#    test = GoogleMaps()
-#    test.get_coordinates("tour eiffel")
+def test():
+    test = GoogleMaps()
+    test.get_coordinates("tour eiffel")
 
-#if __name__ == "__main__":
-#    test()
+if __name__ == "__main__":
+    test()
 

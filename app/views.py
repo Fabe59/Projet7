@@ -19,8 +19,6 @@ def ajax():
     response = test_parser.split_sentence()
     response = test_parser.parsing_stopwords()
 
-    print(response)
-
     #test_google = GoogleMaps()
     #google_response = test_google.get_coordinates(response)
 

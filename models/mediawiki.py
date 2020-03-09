@@ -28,7 +28,7 @@ class Mediawiki:
             "action" : "query",
             "prop" : "extracts|info",
             "inprop" : "url",
-            "exsentences" : 5,
+            "exchars" : 2000,
             "explaintext" : True,
             "pageids" : pageid
         }
@@ -37,4 +37,4 @@ class Mediawiki:
         data = request.json()
         info = data["query"]["pages"][str(pageid)]["extract"]
         url = data["query"]["pages"][str(pageid)]["fullurl"]
-
+        return info, url

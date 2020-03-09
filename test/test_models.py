@@ -19,7 +19,7 @@ class Test_Parser:
 
     def test_parsing_stopwords(self):
         sentence_test4 = Parser([ 'je', 'voudrais', 'aller', 'Place', 'du', 'Trocadero', 'à', 'Paris' ])
-        assert sentence_test4.parsing_stopwords() == ['Place', 'Trocadero', 'Paris']
+        assert sentence_test4.parsing_stopwords() == 'Place Trocadero Paris'
     
 class Test_GoogleMaps:
 

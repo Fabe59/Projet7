@@ -14,11 +14,24 @@ class Services():
         sentence_parser = parser.parsing_ponctuation()
         sentence_parser = parser.split_sentence()
         sentence_parser = parser.parsing_stopwords()
+
         google = GoogleMaps()
         address, lat, long = google.get_coordinates(sentence_parser)
+
         mediawiki = Mediawiki()
         page_id = mediawiki.get_page_id(lat, long)
-        return mediawiki.extract_info(page_id)
+        extract, url = mediawiki.extract_info(page_id)
+
+        data = {
+            "question" : sentence_parser,
+            "address" : address,
+            "latitude" : lat,
+            "longitude" : long,
+            "info" : extract,
+            "url" : url
+        }
+
+        return data
 
 
 

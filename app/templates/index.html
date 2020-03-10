@@ -18,6 +18,7 @@
                 <input type="text" name="userText" id="userText" class="input-user-text" placeholder="Pour ta recherche, c'est ici!" autofocus>
                 <input type="submit" value="Envoyer">
             </form>
+            <div id=myDiv>Voici votre réponse : </div>
 
             <script>
                 let form =document.querySelector("#request-input-form");
@@ -27,10 +28,12 @@
                     
                     // Envoyer le contenu du formulaire au serveur
                     fetch("/ajax", {
-                        method: "Post",
+                        method: "POST",
                         body: new FormData(form)
-                    }).then(function(response) {
-                        console.log(response.json())
+                    })
+                    .then(function(response) {
+                        var div = document.getElementById('myDiv')
+                        div.innerHTML += response.json()
                             });
                 })
             </script>

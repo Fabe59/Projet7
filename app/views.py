@@ -16,4 +16,4 @@ def ajax():
     services = Services()
     response = services.services(user_text)
 
-    return jsonify(response)
+    return response

@@ -28,7 +28,7 @@ class Mediawiki:
             "action" : "query",
             "prop" : "extracts|info",
             "inprop" : "url",
-            "exchars" : 2000,
+            "exsentences" : 5,
             "explaintext" : True,
             "pageids" : pageid
         }

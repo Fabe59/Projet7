@@ -7,7 +7,7 @@
         <meta name="description" content="GrandPy Bot, le papy robot">
         <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}/>
     </head>
-    <body>
+    <body id="body">
         <header class="header">
             <h1 class="header-title">GrandPy Bot, le papy robot qui en a dans le ciboulot</h1>
         </header>
@@ -18,10 +18,54 @@
                 <input type="text" name="userText" id="userText" class="input-user-text" placeholder="Pour ta recherche, c'est ici!" autofocus>
                 <input type="submit" value="Envoyer">
             </form>
-            <div id=myDiv>Voici votre réponse : </div>
+            <div id="response"></div>
 
             <script>
                 let form =document.querySelector("#request-input-form");
+
+                function createDivResponse(text){
+                    let newDiv = document.createElement('div');
+                    newDiv.textContent = text;
+                    let parentNode = document.getElementById("response");
+                    parentNode.appendChild(newDiv);
+                };
+
+                function createAResponse(url){
+                    let newA = document.createElement('a');
+                    newA.setAttribute('target', '_blank');
+                    let linkText = document.createTextNode("Tu veux encore plus d'infos? C'est ici!");
+                    newA.appendChild(linkText);
+                    newA.title = "Plus d'infos?";
+                    newA.href = url;
+                    let parentNode = document.getElementById("response");
+                    parentNode.appendChild(newA);
+                };
+
+                function initMap() {
+                    //creation de la div pour afficher la map
+                    let newDiv = document.createElement('div');
+
+                    // création d'une variable pour tester avec des coordonnées. Par la suite je passerai les coordonnées du lieux choisi en paramère vie le json
+                    var LatLng = {lat: -25.363, lng: 131.044};
+
+                    // appel de la carte dans la div crééé, au coordonnées demandées
+                    var map = new google.maps.Map(newDiv, {
+                        zoom: 6,
+                        center: LatLng
+                        });
+                    
+                    // affichage du marqeur sur la carte précédente aux coordonnées voulus
+                    var marker = new google.maps.Marker({
+                        position: LatLng,
+                        map: map,
+                        title: "Ce que tu recherches se situe ici!"
+                        });
+                    
+                    // ajout d'un noeud au noeud parent "response" pour afficher le tout
+                    let parentNode = document.getElementById("response");
+                    parentNode.appendChild(newDiv);
+                    
+                };
 
                 form.addEventListener("submit", function (event){
                     event.preventDefault();
@@ -31,11 +75,24 @@
                         method: "POST",
                         body: new FormData(form)
                     })
+                    // retourne une promesse en JSON
                     .then(function(response) {
-                        var div = document.getElementById('myDiv')
-                        div.innerHTML += response.json()
-                            });
-                })
+                        return response.json()
+                    })  
+                    //affichage de la conversion du JSON en objet dans la console
+                    .then(function(json) {
+                        console.log(json)
+                    createDivResponse(json['address'])
+                    createDivResponse(json['info'])
+                    createAResponse(json['url'])
+                    initMap()
+                    })
+                    //.then(response => response.json())
+                    //.then(json => console.log(json))
+                });
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=KEYAPI&callback=initMap">
             </script>
 
         </section>

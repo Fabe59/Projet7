@@ -3,13 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>GrandPy Bot</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="GrandPy Bot, le papy robot">
         <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}/>
     </head>
     <body id="body">
         <header class="header">
-            <h1 class="header-title">GrandPy Bot, le papy robot qui en a dans le ciboulot</h1>
+            <h1 class="header-title">GrandPy Bot, le papy robot qui en a dans le ciboulot</h1>       
         </header>
         <section class="main">
             <h3 class="intro">J'ai d'énormes connaissances sur les lieux et leur histoire. Poses-moi une question pour me tester!</h3>
@@ -19,81 +18,82 @@
                 <input type="submit" value="Envoyer">
             </form>
             <div id="response"></div>
+                <script>
+                    let form =document.querySelector("#request-input-form");
 
-            <script>
-                let form =document.querySelector("#request-input-form");
+                    function createResponse(text){
+                        let newDiv = document.createElement('div');
+                        newDiv.style.margin = "10px";
+                        newDiv.style.textAlign = "justify";
+                        newDiv.textContent = text;
+                        let parentNode = document.getElementById('response')
+                        parentNode.appendChild(newDiv);
+                    };
 
-                function createDivResponse(text){
-                    let newDiv = document.createElement('div');
-                    newDiv.textContent = text;
-                    let parentNode = document.getElementById("response");
-                    parentNode.appendChild(newDiv);
-                };
+                    function createAResponse(url){
+                        let newA = document.createElement('a');
+                        newA.setAttribute('target', '_blank');
+                        let linkText = document.createTextNode("Tu veux encore plus d'infos? C'est ici!");
+                        newA.appendChild(linkText);
+                        newA.title = "Plus d'infos?";
+                        newA.href = url;
+                        let parentNode = document.getElementById("response");
+                        parentNode.appendChild(newA);
+                    };
 
-                function createAResponse(url){
-                    let newA = document.createElement('a');
-                    newA.setAttribute('target', '_blank');
-                    let linkText = document.createTextNode("Tu veux encore plus d'infos? C'est ici!");
-                    newA.appendChild(linkText);
-                    newA.title = "Plus d'infos?";
-                    newA.href = url;
-                    let parentNode = document.getElementById("response");
-                    parentNode.appendChild(newA);
-                };
+                    function createMap(lat, long) {
+                        //creation de la div pour afficher la map
+                        let newDivMap = document.createElement('div');
+                        newDivMap.style.width = "auto";
+                        newDivMap.style.height = "400px";
 
-                function initMap() {
-                    //creation de la div pour afficher la map
-                    let newDiv = document.createElement('div');
+                        // création d'une variable pour les coordonnées
+                        let LatLng = {'lat': lat, 'lng': long};
 
-                    // création d'une variable pour tester avec des coordonnées. Par la suite je passerai les coordonnées du lieux choisi en paramère vie le json
-                    var LatLng = {lat: -25.363, lng: 131.044};
+                        // appel de la carte dans la div crééé, au coordonnées demandées
+                        let map = new google.maps.Map(newDivMap, {
+                            zoom: 13,
+                            center: LatLng
+                            });
+                        
+                        // affichage du marqeur sur la carte précédente aux coordonnées voulues
+                        let marker = new google.maps.Marker({
+                            position: LatLng,
+                            map: map,
+                            title: "Ta recherche t'amène ici"
+                            });
+                        
+                        // ajout du nouveau noeud au noeud parent "response" pour afficher le tout
+                        let parentNode = document.getElementById("response");
+                        parentNode.appendChild(newDivMap);                    
+                    };
 
-                    // appel de la carte dans la div crééé, au coordonnées demandées
-                    var map = new google.maps.Map(newDiv, {
-                        zoom: 6,
-                        center: LatLng
-                        });
-                    
-                    // affichage du marqeur sur la carte précédente aux coordonnées voulus
-                    var marker = new google.maps.Marker({
-                        position: LatLng,
-                        map: map,
-                        title: "Ce que tu recherches se situe ici!"
-                        });
-                    
-                    // ajout d'un noeud au noeud parent "response" pour afficher le tout
-                    let parentNode = document.getElementById("response");
-                    parentNode.appendChild(newDiv);
-                    
-                };
+                    form.addEventListener("submit", function (event){
+                        event.preventDefault();
+                        
+                        // Envoyer le contenu du formulaire au serveur
+                        fetch("/ajax", {
+                            method: "POST",
+                            body: new FormData(form)
+                        })
+                        // retourne une promesse en JSON
+                        .then(function(response) {
+                            return response.json()
+                        })  
+                        //affichage de la conversion du JSON en objet dans la console
+                        .then(function(json) {
+                            console.log(json)
+                        createResponse(json['address'])
+                        createResponse(json['info'])
+                        createAResponse(json['url'])
+                        createMap(json['latitude'], json['longitude'])
+                        })
+                        //.then(response => response.json())
+                        //.then(json => console.log(json))
+                    });
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=xxxxxxxxx"></script>
 
-                form.addEventListener("submit", function (event){
-                    event.preventDefault();
-                    
-                    // Envoyer le contenu du formulaire au serveur
-                    fetch("/ajax", {
-                        method: "POST",
-                        body: new FormData(form)
-                    })
-                    // retourne une promesse en JSON
-                    .then(function(response) {
-                        return response.json()
-                    })  
-                    //affichage de la conversion du JSON en objet dans la console
-                    .then(function(json) {
-                        console.log(json)
-                    createDivResponse(json['address'])
-                    createDivResponse(json['info'])
-                    createAResponse(json['url'])
-                    initMap()
-                    })
-                    //.then(response => response.json())
-                    //.then(json => console.log(json))
-                });
-            </script>
-            <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=KEYAPI&callback=initMap">
-            </script>
 
         </section>
         <footer class="footer">

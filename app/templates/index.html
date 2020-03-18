@@ -2,30 +2,71 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>GrandPy Bot</title>
         <meta name="description" content="GrandPy Bot, le papy robot">
+        <title>GrandPy Bot</title>
         <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}/>
     </head>
-    <body id="body">
+    <body>
         <header class="header">
-            <h1 class="header-title">GrandPy Bot, le papy robot qui en a dans le ciboulot</h1>       
+            <div class="baseline">
+                <span class="header-title">GrandPy Bot</span>
+                <span class="slogan">le papy robot qui en a dans le ciboulot</span>
+            </div>
         </header>
         <section class="main">
-            <h3 class="intro">J'ai d'énormes connaissances sur les lieux et leur histoire. Poses-moi une question pour me tester!</h3>
             <form id="request-input-form">
                 <label for="userText"></label>
                 <input type="text" name="userText" id="userText" class="input-user-text" placeholder="Pour ta recherche, c'est ici!" autofocus>
                 <input type="submit" value="Envoyer">
             </form>
             <div id="response"></div>
-
-                <script>
+            <div id="spinner"></div>
+            <script>
                     let form =document.querySelector("#request-input-form");
+                    const spinner = document.getElementById("spinner");
+
+                    function showSpinner() {
+                        spinner.className = "show";
+                        setTimeout(() => {
+                            spinner.className = spinner.className.replace("show", "");
+                        }, 5000);
+                    };
+
+                    function hideSpinner() {
+                        spinner.className = spinner.className.replace("show", "");
+                    };
+
+                    function grandPyAnswer(question) {
+                        let newDivAnswer = document.createElement('div');
+                        newDivAnswer.style.textAlign = "center";
+                        newDivAnswer.style.fontFamily = "system-ui";
+                        newDivAnswer.style.lineHeight = "1.25";
+                        newDivAnswer.style.marginTop = "20px";
+                        newDivAnswer.style.marginBottom = "10px";
+                        newDivAnswer.style.backgroundColor = "#ff9e1e";
+                        newDivAnswer.style.borderBottomLeftRadius = "10px";
+                        newDivAnswer.style.borderBottomRightRadius = "10px";
+                        newDivAnswer.style.borderTopLeftRadius = "10px";
+                        newDivAnswer.style.borderTopRightRadius = "10px";
+                        newDivAnswer.style.padding = "5px";
+                        newDivAnswer.textContent = question;
+                        let parentNode = document.getElementById('response');
+                        parentNode.appendChild(newDivAnswer);
+                    };
 
                     function createResponse(text){
                         let newDiv = document.createElement('div');
-                        newDiv.style.margin = "10px";
+                        newDiv.style.fontFamily = "system-ui";
+                        newDiv.style.lineHeight = "1.25";
+                        newDiv.style.marginTop = "10px";
+                        newDiv.style.marginBottom = "10px";
                         newDiv.style.textAlign = "justify";
+                        newDiv.style.backgroundColor = "#AADAFF";
+                        newDiv.style.borderBottomLeftRadius = "10px";
+                        newDiv.style.borderBottomRightRadius = "10px";
+                        newDiv.style.borderTopLeftRadius = "10px";
+                        newDiv.style.borderTopRightRadius = "10px";
+                        newDiv.style.padding = "5px";
                         newDiv.textContent = text;
                         let parentNode = document.getElementById('response')
                         parentNode.appendChild(newDiv);
@@ -33,8 +74,18 @@
 
                     function createAResponse(url){
                         let newA = document.createElement('a');
+                        newA.style.display = "block";
+                        newA.style.marginBottom = "10px";
+                        newA.style.fontFamily = "system-ui";
+                        newA.style.lineHeight = "1.25";
+                        newA.style.backgroundColor = "#AADAFF";
+                        newA.style.borderBottomLeftRadius = "10px";
+                        newA.style.borderBottomRightRadius = "10px";
+                        newA.style.borderTopLeftRadius = "10px";
+                        newA.style.borderTopRightRadius = "10px";
+                        newA.style.padding = "5px";
                         newA.setAttribute('target', '_blank');
-                        let linkText = document.createTextNode("Tu veux encore plus d'infos? C'est ici!");
+                        let linkText = document.createTextNode("En savoir plus avec Wikipédia");
                         newA.appendChild(linkText);
                         newA.title = "Plus d'infos?";
                         newA.href = url;
@@ -67,10 +118,20 @@
                         // ajout du nouveau noeud au noeud parent "response" pour afficher le tout
                         let parentNode = document.getElementById("response");
                         parentNode.appendChild(newDivMap);                    
-                    };         
+                    };
+
+                    function createhr() {
+                        let newHr = document.createElement('hr');
+                        newHr.style.height = "3px";
+                        newHr.style.backgroundColor = "black";
+                        let parentNode = document.getElementById("response");
+                        parentNode.appendChild(newHr);
+                    }      
 
                     form.addEventListener("submit", function (event){
                         event.preventDefault();
+
+                        showSpinner()
                         
                         // Envoyer le contenu du formulaire au serveur
                         fetch("/ajax", {
@@ -83,11 +144,14 @@
                         })  
                         //affichage de la conversion du JSON en objet dans la console
                         .then(function(json) {
+                            hideSpinner()
                             console.log(json)
+                        grandPyAnswer(json['question'])
                         createResponse(json['address'])
                         createResponse(json['info'])
                         createAResponse(json['url'])
                         createMap(json['latitude'], json['longitude'])
+                        createhr();
                         })
                         //.then(response => response.json())
                         //.then(json => console.log(json))

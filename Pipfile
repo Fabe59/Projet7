@@ -10,6 +10,7 @@ pytest = "*"
 requests = "*"
 logzero = "*"
 flake8 = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

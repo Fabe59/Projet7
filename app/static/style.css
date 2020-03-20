@@ -1,3 +1,4 @@
+
 .header {
     height: 200px;
     padding: 30px;
@@ -17,14 +18,14 @@
     font-size: 100px;
     color: rgb(255, 158, 30);
     display: block;
-    padding-right: 100px;
+    padding-right: 200px;
 }
 
 .slogan {
     font-family: cursive;
     font-size: 30px;
     font-weight: lighter;
-    padding-left: 300px;
+    padding-left: 320px;
 }
 
 .main {
@@ -39,6 +40,7 @@
 .input-user-text {
     width: 500px;
     font-size: 16px;
+    outline: none;
 }
 
 input[type=submit] {
@@ -66,7 +68,7 @@ input[type=submit]:active {
     height: 80px;
   
     border: 5px solid #f3f3f3;
-    border-top: 5px solid dodgerblue;
+    border-top: 5px solid #ff9e1e;
     border-radius: 100%;
   
     position: absolute;
@@ -91,19 +93,64 @@ input[type=submit]:active {
     visibility: visible;
   }
 
+.answer {
+  text-align : center;
+  font-family: system-ui;
+  line-height : 1.25;
+  margin-top : 20px;
+  margin-bottom : 10px;
+  background-color : #ff9e1e;
+  border-radius: 10px;
+  padding : 5px;
+}
+
+.response-display {
+    font-family: system-ui;
+    line-height: 1.25;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: justify;
+    background-color: #AADAFF;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.response-url {
+    display: block;
+    margin-bottom: 10px;
+    font-family: system-ui;
+    line-height: 1.25;
+    background-color: #AADAFF;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.map-response {
+    width: auto;
+    height: 400px;
+}
+
+.hr-response {
+    height: 3px;
+    background-color: black;
+}
+
 .footer {
     background: grey;
     padding: 20px 20px;
 }
 
 .section-link {
+    display: flexbox;
+    justify-content: space-around;
     text-align: center;
 }
 
 .section-link a {
+    display: inline-block;
     color: whitesmoke;
-    padding-right: 50px;
-    padding-left: 50px;
+    padding-right: 5%;
+    padding-left: 5%;
     text-decoration-line: none;
 }
 
@@ -115,14 +162,21 @@ input[type=submit]:active {
     .header {
         height: 100px;
     }
+
     .header-title {
-        font-size: 20px;
+        font-size: 30px;
         padding-right: 0px;
     }
+
     .slogan {
-        font-size: 16px;
+        font-size: 20px;
         padding-left: 0px;
     }
+
+    .input-user-text {
+        width: 200px;
+    }
+
     .section-link a {
         padding-left: 10px;
         padding-right: 10px;

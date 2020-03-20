@@ -1,4 +1,4 @@
-from settings.config import GOOGLE_MAP_API_KEY
+from settings.config import key_google_geocoding_api
 import requests
 
 
@@ -9,8 +9,8 @@ class GoogleMaps:
 
     def get_coordinates(self, location):
         params = {
-            "address" : location,
-            "key" : "X"
+            "address": location,
+            "key": key_google_geocoding_api
         }
 
         request = requests.get(self.url, params)

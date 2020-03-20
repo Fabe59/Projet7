@@ -23,16 +23,12 @@ class Services():
         extract, url = mediawiki.extract_info(page_id)
 
         data = {
-            "question" : sentence_parser,
-            "address" : address,
-            "latitude" : lat,
-            "longitude" : long,
-            "info" : extract,
-            "url" : url
+            "question": sentence_parser,
+            "address": address,
+            "latitude": lat,
+            "longitude": long,
+            "info": extract,
+            "url": url
         }
 
         return data
-
-
-
-       

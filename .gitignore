@@ -1,7 +1,6 @@
 __pycache__/
 .pytest_cache
 .vscode/settings.json
-API_key.rtf
 .vscode
 app/__init__.pyc
 .env

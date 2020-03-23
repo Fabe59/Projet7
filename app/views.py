@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, escape
 
 from app.services import Services
 from settings.config import key_google_map_api
@@ -15,5 +15,5 @@ def home():
 def ajax():
     user_text = request.form["userText"]
     services = Services()
-    response = services.services(user_text)
+    response = services.services("%s" % escape(user_text))
     return response

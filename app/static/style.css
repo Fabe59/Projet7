@@ -12,15 +12,15 @@
 }
 
 .header-title {
-    font-family: fantasy, serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
     font-size: 6rem;
     color: rgb(255, 158, 30);
     display: block;
-    padding-right: 250px;
+    padding-right: 300px;
 }
 
 .slogan {
-    font-family: cursive;
+    font-family: cursive, sans-serif;
     font-size: 2rem;
     font-weight: lighter;
     padding-left: 320px;
@@ -139,7 +139,7 @@ input[type=submit]:active {
 }
 
 .section-link {
-    display: flexbox;
+    display: flex;
     justify-content: space-around;
     text-align: center;
 }

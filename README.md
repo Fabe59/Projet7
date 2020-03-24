@@ -1,4 +1,4 @@
-# Projet7 : Grandpy Bot
+# Projet7 : GrandPy Bot
 
 With GrandPy Bot, ask him for informations about a location.  
 After a little thinking, if he knows anything about this place, he will give you the address, show you the place in a Google Map, and tell you a story about the spot.  

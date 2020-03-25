@@ -1,6 +1,7 @@
 from models.parser import Parser
 from models.googlemaps import GoogleMaps
 from models.mediawiki import Mediawiki
+from models.grandpymessages import GrandPyMessages
 
 
 class Services():
@@ -9,6 +10,9 @@ class Services():
         pass
 
     def services(self, user_text):
+        message = GrandPyMessages()
+        grandpymessage = message.random_message()
+
         parser = Parser(user_text)
         sentence_parser = parser.parsing_lowercase()
         sentence_parser = parser.parsing_ponctuation()
@@ -24,6 +28,7 @@ class Services():
 
         data = {
             "question": sentence_parser,
+            "message": grandpymessage,
             "address": address,
             "latitude": lat,
             "longitude": long,

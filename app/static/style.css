@@ -90,14 +90,22 @@ input[type=submit]:active {
   }
 
 .answer {
-  text-align : center;
-  font-family: system-ui;
-  line-height : 1.25;
-  margin-top : 20px;
-  margin-bottom : 10px;
-  background-color : #ff9e1e;
-  border-radius: 10px;
-  padding : 5px;
+    text-align : center;
+    font-family: system-ui;
+    line-height : 1.25;
+    margin-top : 20px;
+    margin-bottom : 10px;
+    background-color : #ff9e1e;
+    border-radius: 10px;
+    padding : 5px;
+}
+
+.grandpymessage {
+    font-family: system-ui;
+    line-height: 1.25;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
 }
 
 .response-display {

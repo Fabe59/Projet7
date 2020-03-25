@@ -20,6 +20,14 @@ function grandPyAnswer(question) {
     parentNode.appendChild(newDivAnswer);
 };
 
+function grandpymessage(message) {
+    let newDivMessage = document.createElement('div');
+    newDivMessage.classList.add('grandpymessage');
+    newDivMessage.textContent = message;
+    let parentNode = document.getElementById('response')
+    parentNode.appendChild(newDivMessage);
+};
+
 function createResponse(text){
     let newDiv = document.createElement('div');
     newDiv.classList.add('response-display');
@@ -92,6 +100,7 @@ form.addEventListener("submit", function (event){
         hideSpinner()
         console.log(json)
     grandPyAnswer(json['question'])
+    grandpymessage(json['message'])
     createResponse(json['address'])
     createResponse(json['info'])
     createAResponse(json['url'])

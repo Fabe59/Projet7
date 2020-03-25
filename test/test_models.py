@@ -1,6 +1,7 @@
 from models.parser import Parser
 from models.googlemaps import GoogleMaps
 from models.mediawiki import Mediawiki
+from models.grandpymessages import GrandPyMessages
 
 
 class Test_Parser:
@@ -119,3 +120,10 @@ class Test_Mediawiki:
                                "de 324 mètres de hauteur (avec antennes)"
                                "située à Paris.",
                                "https://fr.wikipedia.org/wiki/Tour_Eiffel")
+
+
+class Test_Grandpymessages:
+
+    def test_random_message(self):
+        message = GrandPyMessages.random_message(self)
+        assert message in GrandPyMessages.LIST_MESSAGE

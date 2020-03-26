@@ -1,6 +1,9 @@
 let form =document.querySelector("#request-input-form");
 const spinner = document.getElementById("spinner");
 
+/** 
+ * function to create a class for the spinner div and display the spinner
+*/
 function showSpinner() {
     spinner.className = "show";
     setTimeout(() => {
@@ -8,10 +11,16 @@ function showSpinner() {
     }, 5000);
 };
 
+/** 
+ * function to hide the spinner 
+*/
 function hideSpinner() {
     spinner.className = spinner.className.replace("show", "");
 };
 
+/** 
+ * function to create a div to display the search reminder
+*/
 function grandPyAnswer(question) {
     let newDivAnswer = document.createElement('div');
     newDivAnswer.classList.add('answer');
@@ -20,6 +29,9 @@ function grandPyAnswer(question) {
     parentNode.appendChild(newDivAnswer);
 };
 
+/** 
+ * function to create a div to display the GrandPy message
+*/
 function grandpymessage(message) {
     let newDivMessage = document.createElement('div');
     newDivMessage.classList.add('grandpymessage');
@@ -28,6 +40,9 @@ function grandpymessage(message) {
     parentNode.appendChild(newDivMessage);
 };
 
+/** 
+ * function to create a div to display answers
+*/
 function createResponse(text){
     let newDiv = document.createElement('div');
     newDiv.classList.add('response-display');
@@ -36,6 +51,9 @@ function createResponse(text){
     parentNode.appendChild(newDiv);
 };
 
+/** 
+ * function to create a div to display the url
+*/
 function createAResponse(url){
     let newA = document.createElement('a');
     newA.classList.add('response-url');
@@ -48,32 +66,38 @@ function createAResponse(url){
     parentNode.appendChild(newA);
 };
 
+/** 
+ * function to create a div to display the google map
+*/
 function createMap(lat, long) {
-    //creation de la div pour afficher la map
+    // Creation of a div tag to display the map
     let newDivMap = document.createElement('div');
     newDivMap.classList.add('map-response');
 
-    // création d'une variable pour les coordonnées
+    // Creation of a variable for coordinates
     let LatLng = {'lat': lat, 'lng': long};
 
-    // appel de la carte dans la div crééé, au coordonnées demandées
+    // Display the map in the created div, at the requested coordinates
     let map = new google.maps.Map(newDivMap, {
         zoom: 13,
         center: LatLng
         });
 
-    // affichage du marqeur sur la carte précédente aux coordonnées voulues
+    // Display of the marker on the map at the desired coordinates
     let marker = new google.maps.Marker({
         position: LatLng,
         map: map,
         title: "Ta recherche t'amène ici"
         });
 
-    // ajout du nouveau noeud au noeud parent "response" pour afficher le tout
+    // adding the new node to the parent node "response" to display everything
     let parentNode = document.getElementById("response");
     parentNode.appendChild(newDivMap);                    
 };
 
+/** 
+ * function to create a "hr" tag
+*/
 function createhr() {
     let newHr = document.createElement('hr');
     newHr.classList.add('hr-response');
@@ -86,16 +110,16 @@ form.addEventListener("submit", function (event){
 
     showSpinner()
                         
-    // Envoyer le contenu du formulaire au serveur
+    // Send the content of the form to the server
     fetch("/ajax", {
         method: "POST",
         body: new FormData(form)
     })
-    // retourne une promesse en JSON
+    // Returns a promise in JSON
     .then(function(response) {
         return response.json()
     })  
-    //affichage de la conversion du JSON en objet dans la console
+    //Display of the conversion of JSON into object in the console
     .then(function(json) {
         hideSpinner()
         console.log(json)

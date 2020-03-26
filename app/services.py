@@ -5,6 +5,7 @@ from models.grandpymessages import GrandPyMessages
 
 
 class Services():
+    """ application class instance """
 
     def __init__(self):
         pass

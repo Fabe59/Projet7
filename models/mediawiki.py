@@ -7,6 +7,7 @@ class Mediawiki:
         self.url = "https://fr.wikipedia.org/w/api.php"
 
     def get_page_id(self, latitude, longitude):
+        """ Getting the wikipedia page id """
         coordinates = f"{latitude}|{longitude}"
         params = {
             "action": "query",
@@ -22,6 +23,7 @@ class Mediawiki:
         return pageid
 
     def extract_info(self, pageid):
+        """ Getting info about the place based on the page id """
         params = {
             "format": "json",
             "action": "query",

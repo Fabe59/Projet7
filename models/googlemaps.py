@@ -8,6 +8,7 @@ class GoogleMaps:
         self.url = "https://maps.googleapis.com/maps/api/geocode/json"
 
     def get_coordinates(self, location):
+        """ Getting the coordinates and address of the place """
         params = {
             "address": location,
             "key": key_google_geocoding_api

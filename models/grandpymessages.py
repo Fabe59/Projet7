@@ -2,6 +2,8 @@ import random
 
 
 class GrandPyMessages:
+    """ Class to display a random messagefrom a list of GranPy Bot messages """
+
     LIST_MESSAGE = [
                     "Et voilà!",
                     "Facile, voici ce que je peux te dire :",

@@ -92,7 +92,7 @@ function createMap(lat, long) {
 
     // adding the new node to the parent node "response" to display everything
     let parentNode = document.getElementById("response");
-    parentNode.appendChild(newDivMap);                    
+    parentNode.appendChild(newDivMap);                  
 };
 
 /** 
@@ -103,6 +103,7 @@ function createhr() {
     newHr.classList.add('hr-response');
     let parentNode = document.getElementById("response");
     parentNode.appendChild(newHr);
+    newHr.scrollIntoView({behavior: "smooth", block: "end"}); 
 };
 
 form.addEventListener("submit", function (event){

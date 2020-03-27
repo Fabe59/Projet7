@@ -1,9 +1,9 @@
+from . import app
+
 from flask import render_template, request, escape
 
 from app.services import Services
 from settings.config import key_google_map_api
-
-from . import app
 
 
 @app.route("/")

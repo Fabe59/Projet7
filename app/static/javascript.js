@@ -27,6 +27,7 @@ function grandPyAnswer(question) {
     newDivAnswer.textContent = question;
     let parentNode = document.getElementById('response');
     parentNode.appendChild(newDivAnswer);
+    newDivAnswer.scrollIntoView({behavior: "smooth"});
 };
 
 /** 
@@ -102,8 +103,7 @@ function createhr() {
     let newHr = document.createElement('hr');
     newHr.classList.add('hr-response');
     let parentNode = document.getElementById("response");
-    parentNode.appendChild(newHr);
-    newHr.scrollIntoView({behavior: "smooth", block: "end"}); 
+    parentNode.appendChild(newHr); 
 };
 
 form.addEventListener("submit", function (event){

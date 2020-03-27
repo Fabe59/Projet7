@@ -146,20 +146,15 @@ input[type=submit]:active {
 
 .section-link {
     display: flex;
-    justify-content: space-around;
-    text-align: center;
+    justify-content: center;
 }
 
 .section-link a {
     display: inline-block;
-    color: whitesmoke;
-    padding-right: 5%;
-    padding-left: 5%;
-    text-decoration-line: none;
-}
-
-.section-link a:hover {
-    text-decoration-line: underline;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 
 @media only all and (max-width: 890px) {
